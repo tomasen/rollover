@@ -4,8 +4,9 @@
 Safely restart current process in golang.
 
 By safely we mean it waits parent process 
-to exit completely before the child process starts to allocate resources.
-The child process will inherit parent process' arguments and environment variables.
+to exit completely before the child process begins to allocate resources.
+The child process will inherit parent process' command line arguments 
+and environment variables.
 
 To put everything simple, we did NOT implement anything "graceful" such as pass network 
 resources to child process to avoid service interruption because it's way too complicate 
