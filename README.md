@@ -8,10 +8,10 @@ to exit completely before the child start to allocate resources.
 The child process will inherit parent process' arguments and environment variables.
 
 To put every thing simple, we did NOT implement anything "graceful" such as pass network 
-resources to child process to avoid service interruption because it's way to complicate 
-for programs that listen to multiple network port or socket.
+resources to child process to avoid service interruption because it's way too complicate 
+for programs that is listening to multiple network ports or sockets.
 
-This package is more suitable for agent program that updated its own binary and require 
+This package is more suitable for an agent program that updates its own binary and requires 
 to restart itself to complete the upgrade.
 
 ## Unit test
