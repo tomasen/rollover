@@ -56,6 +56,12 @@ kill -HUP 29544  -> to rollover(restart).
 kill 29544  -> to quit
 ```
 
-7. Loop between step 3 to 6 to see if it works for multiple rollover(restart).
+7. Loop between step 3 to 6 to see if it works for multiple rollovers(restart).
 
 8. Now we can kill the child by run `kill 29544`
+
+## Few considerations
+
+Q. Why kill the parent from child instead of quitting the parent when rollover.Restart()?
+
+A. In case the child is failed to spawn.
