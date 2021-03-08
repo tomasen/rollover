@@ -1,4 +1,6 @@
 # rollover
+[![Go Reference](https://pkg.go.dev/badge/github.com/tomasen/rollover.svg)](https://pkg.go.dev/github.com/tomasen/rollover)
+
 Safely restart current process in golang.
 
 By safely we mean wait parent process 
