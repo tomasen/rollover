@@ -3,11 +3,11 @@
 
 Safely restart current process in golang.
 
-By safely we mean wait parent process 
-to exit completely before the child start to allocate resources.
+By safely we mean it waits parent process 
+to exit completely before the child process starts to allocate resources.
 The child process will inherit parent process' arguments and environment variables.
 
-To put every thing simple, we did NOT implement anything "graceful" such as pass network 
+To put everything simple, we did NOT implement anything "graceful" such as pass network 
 resources to child process to avoid service interruption because it's way too complicate 
 for programs that is listening to multiple network ports or sockets.
 
@@ -15,11 +15,11 @@ This package is more suitable for an agent program that updates its own binary a
 to restart itself to complete the upgrade.
 
 ## Unit test
-It's hard to write unit test for a process keep restarting(exit/fork). 
+It's hard to write unit tests for a process keep restarting(exit/fork). 
 
 Here is how it can be tested:
 
-1. Build and start the parent process
+1. Build and start a parent process
 ```
 go build -o ./bin/example ./example
 ./bin/example -any=arguments -we=want -inherited=to -be=tested
@@ -56,5 +56,6 @@ kill -HUP 29544  -> to rollover(restart).
 kill 29544  -> to quit
 ```
 
-7. Now we can kill the child by run `kill 29544`
+7. Loop between step 3 to 6 to see if it works for multiple rollover(restart).
 
+8. Now we can kill the child by run `kill 29544`
