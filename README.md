@@ -63,6 +63,13 @@ kill 29544  -> to quit
 
 ## Few considerations
 
-Q. Why kill the parent from child instead of quitting the parent when rollover.Restart()?
+Q. Why kill the parent from child instead of quitting the parent when `rollover.Restart()`?
 
 A. In case the child is failed to spawn.
+
+---
+Q. Why not put the syscall signal handler to the package?
+
+A. It's caller's responsibility and privilege to decide when or under what condition to 
+rollover(restart). There may be other ways such as by API calls or automatically happened when 
+binary update finished.
