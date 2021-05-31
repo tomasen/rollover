@@ -62,10 +62,22 @@ func Restart() (child *os.Process, err error) {
 
 	pid := os.Getpid()
 
-	envs := append(os.Environ(), EnvKeyParentPID+"="+strconv.Itoa(pid))
+	export := EnvKeyParentPID+"="+strconv.Itoa(pid)
+        envs := os.Environ()
+	replaced := false
+	for k, v := range envs {
+		if strings.HasPrefix(v, EnvKeyParentPID) {
+			envs[k] = export
+			replaced = true
+			break
+		}
+	}
+	if !replaced {
+		envs = append(os.Environ(), export)
+	}
 
 	files := make([]*os.File, 3)
-	files[syscall.Stdin] = os.Stdin
+	files[syscall.Stdin] = nil
 	files[syscall.Stdout] = os.Stdout
 	files[syscall.Stderr] = os.Stderr
 
@@ -74,6 +86,9 @@ func Restart() (child *os.Process, err error) {
 		Dir: workdir,
 		Env: envs,
 		Files: files,
-		Sys: &syscall.SysProcAttr{},
+		Sys: &syscall.SysProcAttr{
+			Foreground: false,
+			Setsid:     true,
+		},
 	})
 }
